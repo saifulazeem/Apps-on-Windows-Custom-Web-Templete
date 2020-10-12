@@ -1,5 +1,7 @@
 <?php
 include "connection.php";
+
+
 ?>
 <!doctype html>
 <html>
@@ -15,7 +17,7 @@ include "connection.php";
 $('.load-more').click(function(){
     var row = Number($('#row').val());
     var allcount = Number($('#all').val());
-    var rowperpage = 2;
+    var rowperpage = 10;
     row = row + rowperpage;
 
     if(row <= allcount){
@@ -57,7 +59,7 @@ $('.load-more').click(function(){
         setTimeout(function() {
 
             // When row is greater than allcount then remove all class='post' element after 3 element
-            $('.tb_row:nth-child(2)').nextAll('.tb_row').remove();
+            $('.tb_row:nth-child(10)').nextAll('.tb_row').remove();
 
             // Reset the value of row
             $("#row").val(0);
@@ -99,16 +101,16 @@ $('.load-more').click(function(){
        
 
             <?php
-            $rowperpage = 2;
+            $rowperpage = 10;
 
             // counting total number of posts
-            $allcount_query = "SELECT count(*) as allcount FROM apps_details";
+            $allcount_query = "SELECT count(*) as allcount FROM playstore_apps_data";
             $allcount_result = mysqli_query($con,$allcount_query);
             $allcount_fetch = mysqli_fetch_array($allcount_result);
             $allcount = $allcount_fetch['allcount'];
 
             // select first 5 posts
-            $query = "select * from apps_details order by app_id asc limit 0,$rowperpage ";
+            $query = "select * from playstore_apps_data order by id asc limit 0,$rowperpage ";
             $result = mysqli_query($con,$query) or die("Error: " . mysqli_error($con));
             ?>
 
@@ -128,9 +130,9 @@ $('.load-more').click(function(){
 
             while($row = mysqli_fetch_array($result)){
 
-                $id = $row['app_id'];
-                $title = $row['title'];
-                $content = $row['content'];
+                $mid = $row['id'];
+                $title = $row['app_name'];
+                $conttent = $row['img_url'];
                 // $shortcontent = substr($content, 0, 160)."...";
                 // $link = $row['link'];
             ?>
@@ -139,11 +141,11 @@ $('.load-more').click(function(){
 
                    
                                 
-                                    <tr class="tb_row" id="post_<?php echo $id; ?>">
+                                    <tr class="tb_row" id="post_<?php echo $mid; ?>">
                                     
-                                    <td><img src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
+                                    <td><img src="<?php echo $conttent ?>"  class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
                                     </td>
-                                    <td><span><?php echo $title ?></span></td>
+                                    <td><span><a href="single.php?mid=<?php echo $mid ?>"><?php echo $title ?></a></span></td>
                                     </tr>
                                     
 

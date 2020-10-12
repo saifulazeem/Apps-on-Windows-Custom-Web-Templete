@@ -1,3 +1,82 @@
+<?php
+
+include("connection.php");
+
+if (isset($_GET['mid']))
+    {
+        $idd=$_GET["mid"];
+        $m_query=$con->prepare("SELECT * FROM playstore_apps_data WHERE id=?");
+	    $m_query->bind_param("s",$idd);
+        $m_query->execute();
+        $resultt=$m_query->get_result();
+
+    while($m_row=$resultt->fetch_assoc())
+    {
+        $t_id=$m_row['id'];
+        $playstore_id=$m_row['playstore_id'];
+        $appliction_name=$m_row['app_name'];
+        $app_dev=$m_row['developer'];
+        $app_cat=$m_row['category'];
+        $app_icon=$m_row['img_url'];
+        $description=$m_row['description'];
+        $app_version=$m_row['version'];
+        $app_req_android=$m_row['required_android'];
+        $app_size=$m_row['size'];
+        $app_permissions=$m_row['permissions'];
+        $app_dev_email=$m_row['dev_email'];
+        $app_dev_web=$m_row['dev_website'];
+        $app_dev_address=$m_row['dev_address'];
+        $app_installs=$m_row['installs'];
+        $app_specific_cat=$m_row['specific_cat'];
+        $app_last_updated=$m_row['last_updated_on'];
+        $app_overall_rating=$m_row['overall_rating'];
+        $app_apk_file=$m_row['apk_file'];
+
+        // echo "<h1>no working </h1>";
+     }
+   $m_query->close();
+
+    }
+    
+
+else
+{
+    // echo '<h1>No idea</h1>';
+    $idd=1;
+    $m_query=$con->prepare("SELECT * FROM playstore_apps_data WHERE id=?");
+	    $m_query->bind_param("s",$idd);
+        $m_query->execute();
+        $resultt=$m_query->get_result();
+
+    while($m_row=$resultt->fetch_assoc())
+    {
+        $t_id=$m_row['id'];
+        $playstore_id=$m_row['playstore_id'];
+        $appliction_name=$m_row['app_name'];
+        $app_dev=$m_row['developer'];
+        $app_cat=$m_row['category'];
+        $app_icon=$m_row['img_url'];
+        $description=$m_row['description'];
+        $app_version=$m_row['version'];
+        $app_req_android=$m_row['required_android'];
+        $app_size=$m_row['size'];
+        $app_permissions=$m_row['permissions'];
+        $app_dev_email=$m_row['dev_email'];
+        $app_dev_web=$m_row['dev_website'];
+        $app_dev_address=$m_row['dev_address'];
+        $app_installs=$m_row['installs'];
+        $app_specific_cat=$m_row['specific_cat'];
+        $app_last_updated=$m_row['last_updated_on'];
+        $app_overall_rating=$m_row['overall_rating'];
+        $app_apk_file=$m_row['apk_file'];
+
+        // echo "<h1>no working </h1>";
+     }
+   $m_query->close();
+}
+
+
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -77,45 +156,49 @@
                     <div class="col-lg-8 col-md-8 col-sm-12">
                         <section>
                             <article>
-                                    <h2 style="color: #4d4d4d;">Vedantu - Live Learning App on Windows Pc</h2>
+                                    <h2 style="color: #4d4d4d;"><?php echo $appliction_name ?></h2>
                                     <br>
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                                <img src="https://lh3.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc=s180-rw" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="200" height="200">
+                                                <img src="<?php echo $app_icon ?>" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="200" height="200">
                                     
                                             </div>
                                             <div class="col-lg-8 col-md-6 col-sm-12">
                                                 <br>
-                                                <table class="table table-striped table-bordered table-hover table-condensed">
-                                                    <!-- <thead>
-                                                        <tr>
-                                                        <th>Developer</th>
-                                                        <th>Category</th>
-                                                        <th>Format</th>
-                                                        <th>Ratings</th>
-                                                        </tr>
-                                                    </thead> -->
-                                                    <tbody>
-                                                        <tr>
-                                                        <th scope="row">Developer</th>
-                                                        <td>Microsoft</td>
-                                                        </tr>
-                                                        <tr>
-                                                        <th scope="row">License</th>
-                                                        <td>MIT</td>
-                                                        </tr>
-                                                        <tr>
-                                                        <th scope="row">Rating</th>
-                                                        <td>4.6</td>
-                                                        </tr>
-                                                        <tr>
-                                                        <th scope="row">Last Updated</th>
-                                                        <td>4 sep 2020</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <h3 style="color: #4d4d4d;">Description</h3>
+                                            <p style="text-align: justify;"><?php
+                                                if(strlen($description) > 100) {
+                                                    $textdisplaylist = '<div style="text-align: justify;">'.substr($description,0,500).'</div>';
+                                                } else {
+                                                    $textdisplaylist = '<div style="text-align: justify;">'.substr($description,0,100).'</div>';
+                                                }
+                                                ?>
+                                                <?php echo $textdisplaylist; ?>
+                                            </p>
+ 
+                                               <form method="post"> <button style="margin-left:120px; width:50%;" name="download_btn" class="btn btn-primary">Download</button></from>
+                                                <?php 
+                                                if (isset($_POST['download_btn']))
+                                                {
+                                                    $file_name = basename($app_apk_file); 
+   
+                                                // Use file_get_contents() function to get the file 
+                                                // from url and use file_put_contents() function to 
+                                                // save the file by using base name 
+                                                    if(file_put_contents( $file_name,file_get_contents($app_apk_file)))
+                                                    { 
+                                                        echo "File downloaded successfully"; 
+                                                    } 
+                                                    else { 
+                                                        echo "File downloading failed.";
+                                                        echo'<br>'; 
+                                                        echo $app_apk_file;
+                                                    }
+                                                }
+                                                  ?>
                                             </div>
+                                            
                                         </div>
                                         </div>
                                         <div class="row">
@@ -133,40 +216,54 @@
                                                 </thead> -->
                                                 <tbody>
                                                     <tr>
+                                                    <th scope="row">Developer</th>
+                                                    <td><?php echo $app_dev ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                    <th scope="row">Type</th>
+                                                    <td><?php echo $app_cat ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                    <th scope="row">Rating</th>
+                                                    <td><?php echo $app_overall_rating ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                    <th scope="row">Last Updated</th>
+                                                    <td><?php echo $app_last_updated ?></td>
+                                                    </tr>
+                                                    <tr>
                                                     <th scope="row">Version</th>
-                                                    <td>2.23</td>
+                                                    <td><?php echo $app_version ?></td>
                                                     </tr>
                                                     <tr>
                                                     <th scope="row">Size</th>
-                                                    <td>20 MB</td>
+                                                    <td><?php echo $app_size ?></td>
                                                     </tr>
                                                     <tr>
-                                                    <th scope="row">Release Date</th>
-                                                    <td>September 20, 20</td>
+                                                    <th scope="row">Developer Email</th>
+                                                    <td><?php echo $app_dev_email ?></td>
                                                     </tr>
                                                     <tr>
                                                     <th scope="row">Category</th>
-                                                    <td>Education</td>
+                                                    <td><?php echo $app_specific_cat ?></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <h3 style="color: #4d4d4d;">Description</h3>
-                                            <p style="text-align: justify;">On this page you can download Vedantu - Live Learning App and install on Windows PC. Vedantu - Live Learning App is free Education app, developed by Vedantu.
-                                            Latest version of Vedantu - Live Learning App is 2.3.9, was released on 2017-08-29 (updated on 2019-09-04). Estimated number of the downloads is more than 10000.
-                                            Overall rating of Vedantu - Live Learning App is 4,1. Generally most of the top apps on Android Store have rating of 4+. This app had been rated by 350 users,
-                                             243 users had rated it 5*, 57 users had rated it 1*. Older versions of Vedantu - Live Learning App are also available with us 2.3.9</p>
-        
+                                                   
                                              <h3  style="color: #4d4d4d;">About this app</h3>
-                                             <p style="text-align: justify;"> On this page you can download Vedantu - Live Learning App and install on Windows PC. Vedantu - Live Learning App is free Education app, developed by Vedantu.
-                                                  Latest version of Vedantu - Live Learning App is 2.3.9, was released on 2017-08-29 (updated on 2019-09-04). Estimated number of the downloads is more than 10000.
-                                                   Overall rating of Vedantu - Live Learning App is 4,1. Generally most of the top apps on Android Store have rating of 4+. This app had been rated by 350 users,
-                                                    243 users had rated it 5*, 57 users had rated it 1*. Older versions of Vedantu - Live Learning App are also available with us 2.3.9 2.3.6 2.3.5 2.3.4 2.3.3 2.3.2
-                                                     2.3.1 2.2.3 2.2.2 2.2.1 2.2.0 2.1.3 2.1.1 2.1.0 2.0.1 2.0.0 1.0.1</p>
+                                             <p style="text-align: justify;"> <?php
+                                                // if(strlen($description) > 100) {
+                                                //     $textdisplaylist = '<div style="text-align: justify;">'.substr($description,0,500).'</div>';
+                                                // } else {
+                                                //     $textdisplaylist = '<div style="text-align: justify;">'.substr($description,0,100).'</div>';
+                                                // }
+                                                echo $description
+                                                ?></p>
         
-                                            <h3 style="color: #4d4d4d;">How to install Vedantu - Live Learning App on Windows?</h3>
-                                            <p style="text-align: justify;"><i>on how to install Vedantu - Live Learning App on Windows XP/7/8/10 Pc & Laptop</i>
+                                            <h3 style="color: #4d4d4d;">How to install <?php echo $appliction_name ?>?</h3>
+                                            <p style="text-align: justify;"><i>Instruction on how to install <?php echo $appliction_name ?> on Windows XP/7/8/10 Pc & Laptop</i>
         
-                                                In this post, I am going to show you how to install Vedantu - Live Learning App on Windows PC by using Android App Player such as BlueStacks, Nox, KOPlayer,
+                                                In this post, I am going to show you how to install <?php echo $appliction_name ?> on Windows PC by using Android App Player such as BlueStacks, Nox, KOPlayer,
                                                 Before you start, you will need to download the apk installer file, you can find download button on top of this page. Save it to easy-to-find location.
         
                                                 [Note]: You can also download older versions of this app on bottom of this page.
@@ -197,7 +294,7 @@
                                                     </tbody>
                                                 </table>
         
-                                                <h3 style="color: #4d4d4d;">Step By Step Guide To Install Vedantu - Live Learning App using BlueStacks</h3>
+                                                <h3 style="color: #4d4d4d;">Step By Step Guide To Install <?php echo $appliction_name ?> using BlueStacks</h3>
                                                 <p style="text-align: justify;">
                                                     <b>Step 1)</b> Download & Install BlueStacks at: <a href="http://bluestacks.com">http://bluestacks.com</a>
         
@@ -214,7 +311,7 @@
         
                                                 </p>
         
-                                                <h3 style="color: #4d4d4d;">How to install Vedantu - Live Learning App on Windows PC using NoxPlayer</h3>
+                                                <h3 style="color: #4d4d4d;">How to install <?php echo $appliction_name ?> on Windows PC using NoxPlayer</h3>
                                                 <p style="text-align: justify;">
                                                     <b>Step 1)</b> Download & Install NoxPlayer at: <a href="http://bignox.com">http://bignox.com</a> . The installation is easy to carry out.
         
@@ -246,7 +343,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td><span></span><a href="#abc"> Slayer أنمي سلاير  on Windows PC  </a></span></td>
+                                                <td><span></span><a href="#abc"> <?php echo $appliction_name ?>  </a></span></td>
                                                 <td>2.3.9</td>
                                                 <td>21.4 MB</td>
                                                 <td><a href="#downloads"><i class="fas fa-download"></i></a></td>
@@ -420,3 +517,6 @@
     </body>
 
 </html>
+
+
+
