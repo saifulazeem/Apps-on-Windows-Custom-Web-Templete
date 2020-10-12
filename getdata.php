@@ -22,7 +22,7 @@ while($row = mysqli_fetch_array($result)){
     $html .= '<tr id="post_'.$mid.'" class="tb_row">';
     $html .= '<td> <img src="'.$content.'" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
     </td>';
-    $html .= '<td> <span><a href=single.php?mid="'.$mid.'">'.$title.' </a></span></td>';
+    $html .= '<td style="text-align:left;"> <span><a href=single.php?mid='.$mid.'>'.$title.' </a></span></td>';
     // $html .= '<p>'.$shortcontent.'</p>';
     // $html .= '<a href="'.$link.'" target="_blank" class="more">More</a>';
     $html .= '</tr>';

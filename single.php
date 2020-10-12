@@ -114,7 +114,7 @@ else
                             <nav class="" id="ul-container">
                                 
                                 <ul>
-                                    <li><a  href="index.html">HOME</a></li>
+                                    <li><a  href="index.php">HOME</a></li>
                                     <li><a style="border: 3px solid; border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" href="single.php">APPS</a></li>
                                     <li><a href="contactus.html">CONTACT US</a></li>
                                     <li><a href="aboutus.html">ABOUT US</a></li>
@@ -435,61 +435,35 @@ else
                                         </tr>
                                     </thead>
                                     <tbody style="text-align:center;">
+                                                    
+                                        <?php 
+                                            $cat='Game';
+                                            $game_guery=$con->prepare("SELECT * FROM playstore_apps_data WHERE category=? LIMIT 10");
+                                            $game_guery->bind_param("s",$cat);
+                                            $game_guery->execute();
+                                            $game_results=$game_guery->get_result();
+                                            if($game_results->num_rows>0)
+                                            {
+                                                while($games_row=$game_results->fetch_assoc())
+                                                {
+
+                                                    $game_icon=$games_row['img_url'];
+                                                    $id=$games_row['id'];
+                                                    $game_name=$games_row['app_name'];
+
+                                        ?>
                                     
                                         <tr>
                                         
-                                        <td><img src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
+                                        <td><img src="<?php echo $game_icon ?>"  class="lazyload" alt="<?php echo $game_name ?>" width="32" height="32">
                                         </td>
-                                        <td><span>Anime Slayer أنمي سلاير</span></td>
+                                        <td style="text-align:left;"><span><a href="single.php?mid=<?php echo $id ?>"><?php echo $game_name  ?></a></span></td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" data-src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" class="lazyload" alt="Car Parking Multiplayer Download on Windows" width="32" height="32">
-                                            </td>
-                                            <td><span>Car Parking Multiplayer</span></td>
-                                        </tr>
-                                        <tr>
-                                        
-                                            <td><img src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
-                                            </td>
-                                            <td><span>Anime Slayer أنمي سلاير</span></td>
-                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" data-src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" class="lazyload" alt="Car Parking Multiplayer Download on Windows" width="32" height="32">
-                                            </td>
-                                            <td><span>Car Parking Multiplayer</span></td>
-                                        </tr>
-                                        <tr>
-                                        
-                                            <td><img src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
-                                            </td>
-                                            <td><span>Anime Slayer أنمي سلاير</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" data-src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" class="lazyload" alt="Car Parking Multiplayer Download on Windows" width="32" height="32">
-                                            </td>
-                                             <td><span>Car Parking Multiplayer</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td><img src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
-                                            </td>
-                                            <td><span>Anime Slayer أنمي سلاير</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" data-src="https://i0.wp.com/cdna.c3dt.com/icon/419703-com.olzhas.carparking.multyplayer.png?w=32" class="lazyload" alt="Car Parking Multiplayer Download on Windows" width="32" height="32">
-                                            </td>
-                                             <td><span>Car Parking Multiplayer</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td><img src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" data-src="https://i0.wp.com/cdnh.c3dt.com/icon/3558253-studio.animee.kanime.com.kanime.png?w=32" class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
-                                            </td>
-                                            <td><span>Anime Slayer أنمي سلاير</span></td>
-                                        </tr>
+
+                                                <?php }
+                                                }
+                                                $game_guery->close() ?>
+                                       
         
                                         </tbody>
                                     </table>

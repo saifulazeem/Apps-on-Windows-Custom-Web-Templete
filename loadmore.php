@@ -145,7 +145,7 @@ $('.load-more').click(function(){
                                     
                                     <td><img src="<?php echo $conttent ?>"  class="lazyload" alt="Anime Slayer أنمي سلاير Download on Windows" width="32" height="32">
                                     </td>
-                                    <td><span><a href="single.php?mid=<?php echo $mid ?>"><?php echo $title ?></a></span></td>
+                                    <td style="text-align:left;"><span><a href="single.php?mid=<?php echo $mid ?>"><?php echo $title ?></a></span></td>
                                     </tr>
                                     
 
